@@ -7,8 +7,9 @@
 Example: ```https://osu.ppy.sh/community/matches/58998314|https://osu.ppy.sh/community/matches/58995507```
 
 3) Enter a creative `filename`
-4) Wait
-5) ???
+4) Press `Make Excel` button
+5) Wait
+6) ???
 7) Profit
 
 A `filename`.xlsx file will be created with scores and names of all players sorted from highest to lowest. Useful for qualifier results and such.
