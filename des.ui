@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>334</height>
+    <width>483</width>
+    <height>224</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,7 +61,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Enter beatmap url:</string>
+         <string>Enter osu! match url(s):</string>
         </property>
        </widget>
       </item>
@@ -109,7 +109,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>540</width>
+     <width>483</width>
      <height>21</height>
     </rect>
    </property>

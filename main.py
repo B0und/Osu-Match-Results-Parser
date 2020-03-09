@@ -1,12 +1,36 @@
-from des_ui import Ui_MainWindow
-from PyQt5 import QtCore, QtGui, QtWidgets
-import re
 import json
-from lxml import html
-import requests
-from pprint import pprint
-from openpyxl import Workbook
+import os
+import re
 import sys
+import webbrowser
+from pprint import pprint
+
+import requests
+from lxml import html
+from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
+
+from des_ui import Ui_MainWindow
+
+
+def get_username_from_id(user_id):
+    url = "https://osu.ppy.sh/users/" + str(user_id)
+    page = requests.get(url)
+    tree = html.fromstring(page.content)
+    results = tree.xpath("//script[@id='json-user']/text()")
+    data = json.loads(str(results[0]))
+    return data["username"]
+
+
+def resize_cols(ws, index):
+    # resize column to fit beatmap name but not too long
+    new_len = len(ws.cell(row=1, column=index).value)
+    if new_len > 100:
+        ws.column_dimensions[get_column_letter(index)].width = 100
+    else:
+        ws.column_dimensions[get_column_letter(index)].width = new_len
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -14,7 +38,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setWindowTitle("Beatmap parser")
+        self.setWindowTitle("Osu! Match Results Parser")
         app_icon = QtGui.QIcon()
         app_icon.addFile("icon.png", QtCore.QSize(256, 256))
         self.setWindowIcon(app_icon)
@@ -26,6 +50,8 @@ class MainWindow(QtWidgets.QMainWindow):
         filename = self.ui.lineEditFilename.text()
 
         lobby_dict = {}
+
+        # gather all scores from different urls in a dictionary
 
         url_list = url.split("|")
         for url in url_list:
@@ -39,7 +65,6 @@ class MainWindow(QtWidgets.QMainWindow):
             for item in data["events"]:
                 if "game" in item.keys():
                     for _ in item["game"].keys():
-                        # pprint(item['game']['beatmap']['beatmapset']['artist'])
                         artist = item["game"]["beatmap"]["beatmapset"]["artist"]
                         song = item["game"]["beatmap"]["beatmapset"]["title"]
                         diff = item["game"]["beatmap"]["version"]
@@ -60,17 +85,17 @@ class MainWindow(QtWidgets.QMainWindow):
                         break
 
         lobby_dict_new = {}
-
+        # sort all scores
         for k, v in lobby_dict.items():
             temp_list = []
             for item in v:
-                temp_list.append((item["score"], item["user_id"]))
+                username = get_username_from_id(item["user_id"])
+                temp_list.append((item["score"], username))
 
             score_list = sorted(temp_list, key=lambda x: x[0], reverse=True)
             lobby_dict_new[k] = score_list
 
-        # pprint(lobby_dict_new)
-
+        # write scores into excel file
         wb = Workbook()
         ws = wb.active
 
@@ -79,6 +104,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         for k, v in lobby_dict_new.items():
             ws.cell(row=rowCnt, column=colCnt, value=k)
+            resize_cols(ws, colCnt)
             for item in v:
                 rowCnt += 1
                 ws.cell(row=rowCnt, column=colCnt, value=item[0])
@@ -89,7 +115,9 @@ class MainWindow(QtWidgets.QMainWindow):
             rowCnt = 1
             colCnt += 2
 
-        wb.save(filename)
+        wb.save(filename + ".xlsx")
+        QMessageBox.about(self, "What did i just pick", "Done !")
+        webbrowser.open(os.getcwd())
         self.close()
 
 
@@ -98,4 +126,3 @@ if __name__ == "__main__":
     root = MainWindow()
     root.show()
     sys.exit(app.exec_())
-

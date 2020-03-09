@@ -12,8 +12,7 @@ path = ["app"] + sys.path
 
 # Dependencies are automatically detected, but it might need fine tuning.
 build_exe_options = {
-    "includes": ["tkinter"],
-    "excludes": ["scipy", "numpy", "pandas", "matplotlib"],
+    "excludes": ["scipy", "numpy", "pandas", "matplotlib", "tkinter"],
     "include_files": [
         os.path.join(PYTHON_INSTALL_DIR, "DLLs", "tk86t.dll"),
         os.path.join(PYTHON_INSTALL_DIR, "DLLs", "tcl86t.dll"),
@@ -33,8 +32,8 @@ if sys.platform == "win32":
 
 
 setup(
-    name="Beatmap Parser",
-    version="1.0.1",
+    name="OsuMatchResultsParser",
+    version="2.0.1",
     description="final",
     options={"build_exe": build_exe_options},
     executables=[Executable("main.py", base=base, icon="icon.ico")],
