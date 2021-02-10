@@ -7,7 +7,7 @@ cffi==1.14.0
 chardet==3.0.4
 Click==7.0
 colorama==0.4.3
-cryptography==3.2
+cryptography==3.3.2
 cx-Freeze==6.1
 entrypoints==0.3
 et-xmlfile==1.0.1
