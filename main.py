@@ -58,8 +58,6 @@ class MainWindow(QtWidgets.QMainWindow):
             page = requests.get(url)
             tree = html.fromstring(page.content)
             results = tree.xpath("//script[@id='json-events']/text()")
-            # print(dir(results[0]))
-            # print(str(results[0]))
             data = json.loads(str(results[0]))
 
             for item in data["events"]:
@@ -89,8 +87,8 @@ class MainWindow(QtWidgets.QMainWindow):
         for k, v in lobby_dict.items():
             temp_list = []
             for item in v:
-                username = get_username_from_id(item["user_id"])
-                temp_list.append((item["score"], username))
+                # username = get_username_from_id(item["user_id"])
+                temp_list.append((item["score"], item["user_id"]))
 
             score_list = sorted(temp_list, key=lambda x: x[0], reverse=True)
             lobby_dict_new[k] = score_list
