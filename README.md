@@ -1,5 +1,9 @@
+# Doesnt work anymore.  Run main.py yourself. will show userids instead of usernames
+
+
+
 # Osu Match Results Parser
-0) download link: http://www.mediafire.com/file/77airezait0yvsv/OsuMatchResultsParser-2.0.1-amd64.msi/file
+ 0) download link: http://www.mediafire.com/file/77airezait0yvsv/OsuMatchResultsParser-2.0.1-amd64.msi/file
 (or run yourself with ```pip install --user --requirement requirements.txt```)
 1) Open installation location and run `main.exe`
 2) Copy paste beatmap url or multiple urls, separated by "|".
