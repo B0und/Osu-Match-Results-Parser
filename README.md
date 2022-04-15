@@ -1,11 +1,10 @@
-# EXE version doesnt work anymore. Run the .bat file to generate the .py file for interface and then  run main.py. will show userids instead of usernames
-
-
-
 # Osu Match Results Parser
- 0) download link: http://www.mediafire.com/file/77airezait0yvsv/OsuMatchResultsParser-2.0.1-amd64.msi/file
-(or run yourself with ```pip install --user --requirement requirements.txt```)
-1) Open installation location and run `main.exe`
+~~0) download link: http://www.mediafire.com/file/77airezait0yvsv/OsuMatchResultsParser-2.0.1-amd64.msi/file
+(or run yourself with ```pip install --user --requirement requirements.txt```)~~
+~~1) Open installation location and run `main.exe`~~
+
+0) old version is broken, generate interface code by running .bat file
+1) run main.py after installing dependencies ( ```pip install --user --requirement requirements.txt```)
 2) Copy paste beatmap url or multiple urls, separated by "|".
 
 Example: ```https://osu.ppy.sh/community/matches/58998314|https://osu.ppy.sh/community/matches/58995507```
