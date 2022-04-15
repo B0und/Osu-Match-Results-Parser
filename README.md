@@ -1,4 +1,4 @@
-# Doesnt work anymore.  Run main.py yourself. will show userids instead of usernames
+# EXE version doesnt work anymore. Run the .bat file to generate the .py file for interface and then  run main.py. will show userids instead of usernames
 
 
 
@@ -20,3 +20,4 @@ A `filename`.xlsx file will be created with scores and names of all players sort
 
 Extra information:
 Tested on win10 64bit. Made with python 3.7 and PyQt5
+
