@@ -3,7 +3,8 @@
 (or run yourself with ```pip install --user --requirement requirements.txt```)~~
 ~~1) Open installation location and run `main.exe`~~
 
-0) old version is broken, generate interface code by running .bat file
+0) old version is broken, generate interface code by running
+`generate_interface_code.bat`  file
 1) run main.py after installing dependencies ( ```pip install --user --requirement requirements.txt```)
 2) Copy paste beatmap url or multiple urls, separated by "|".
 
